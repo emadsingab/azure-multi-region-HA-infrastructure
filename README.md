@@ -19,13 +19,13 @@ We engineered a multi-layered approach to guarantee zero downtime:
 
 ### 2. Cost Optimization via VNet Peering 💰
 Deploying an Azure Bastion host in every region can drastically increase monthly cloud costs. To achieve a highly cost-optimized administration model:
-* We established **Global VNet Peering** between the West US and East US virtual networks.
+* We established **Regional VNet Peering** between the West US and East US virtual networks.
 * This low-latency backbone allowed us to provision a 
 * **Single Azure Bastion Host** in the primary region, which can securely route traffic and manage Virtual Machines in *both* regions using their private IPs.
 
-### 3. Ironclad Security (Zero Public IPs) 🛡️
+### 3. Zero Public IPs 🛡️
 The compute layer is completely isolated from the public internet to prevent brute-force and DDoS attacks:
-* **No Public IPs:** Virtual Machines are strictly assigned Private IPs. Remote administration is done exclusively through the aforementioned Azure Bastion.
+* **No Public IPs:** Virtual Machines are strictly assigned Private IPs. Remote administration is done exclusively through the Azure Bastion.
 * **Secure Outbound Access:** For the backend servers to download necessary OS updates and patches without being exposed inbound, we deployed regional 
 * **NAT Gateways**. This allows private instances to initiate outbound connections to the internet safely, translating their private IPs to a unified public IP securely.
 
